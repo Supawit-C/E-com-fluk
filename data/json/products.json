@@ -1,0 +1,162 @@
+[
+    {
+        "id": 1,
+        "name": "Organic Fuji Apple",
+        "price": 7.79,
+        "sale_tag": "Sale",
+        "image": "images/img-pro-01.jpg",
+        "category": "best-seller"
+    },
+    {
+        "id": 2,
+        "name": "Fresh Strawberries",
+        "price": 12.50,
+        "sale_tag": "New",
+        "image": "images/img-pro-02.jpg",
+        "category": "best-seller"
+    },
+    {
+        "id": 3,
+        "name": "Cavendish Banana",
+        "price": 3.99,
+        "sale_tag": "Sale",
+        "image": "images/img-pro-03.jpg",
+        "category": "best-seller"
+    },
+    {
+        "id": 4,
+        "name": "Valencia Orange",
+        "price": 5.49,
+        "sale_tag": null,
+        "image": "images/img-pro-03.jpg",
+        "category": "special-grid"
+    },
+    {
+        "id": 5,
+        "name": "Green Bell Pepper",
+        "price": 2.99,
+        "sale_tag": "Sale",
+        "image": "images/img-pro-03.jpg",
+        "category": "best-seller"
+    },
+    {
+        "id": 6,
+        "name": "Red Onion",
+        "price": 1.80,
+        "sale_tag": null,
+        "image": "images/img-pro-03.jpg",
+        "category": "special-grid"
+    },
+    {
+        "id": 7,
+        "name": "Organic Broccoli",
+        "price": 4.25,
+        "sale_tag": "Sale",
+        "image": "images/img-pro-03.jpg",
+        "category": "best-seller"
+    },
+    {
+        "id": 8,
+        "name": "Whole Milk 1L",
+        "price": 3.50,
+        "sale_tag": null,
+        "image": "images/img-pro-03.jpg",
+        "category": "special-grid"
+    },
+    {
+        "id": 9,
+        "name": "Greek Yogurt",
+        "price": 6.99,
+        "sale_tag": "Sale",
+        "image": "images/img-pro-03.jpg",
+        "category": "best-seller"
+    },
+    {
+        "id": 10,
+        "name": "Cheddar Cheese",
+        "price": 8.20,
+        "sale_tag": null,
+        "image": "images/img-pro-03.jpg",
+        "category": "special-grid"
+    },
+    {
+        "id": 11,
+        "name": "Artisan Sourdough",
+        "price": 5.50,
+        "sale_tag": "Sale",
+        "image": "images/img-pro-03.jpg",
+        "category": "best-seller"
+    },
+    {
+        "id": 12,
+        "name": "Whole Wheat Bread",
+        "price": 3.20,
+        "sale_tag": null,
+        "image": "images/img-pro-03.jpg",
+        "category": "special-grid"
+    },
+    {
+        "id": 13,
+        "name": "Free Range Eggs",
+        "price": 4.80,
+        "sale_tag": "New",
+        "image": "images/img-pro-03.jpg",
+        "category": "best-seller"
+    },
+    {
+        "id": 14,
+        "name": "Extra Virgin Olive Oil",
+        "price": 15.99,
+        "sale_tag": "Sale",
+        "image": "images/img-pro-03.jpg",
+        "category": "special-grid"
+    },
+    {
+        "id": 15,
+        "name": "Basmati Rice 5kg",
+        "price": 18.50,
+        "sale_tag": null,
+        "image": "images/img-pro-03.jpg",
+        "category": "best-seller"
+    },
+    {
+        "id": 16,
+        "name": "Roasted Coffee Beans",
+        "price": 14.00,
+        "sale_tag": "Hot",
+        "image": "images/img-pro-03.jpg",
+        "category": "special-grid"
+    },
+    {
+        "id": 17,
+        "name": "Green Tea Bags",
+        "price": 6.30,
+        "sale_tag": "Sale",
+        "image": "images/img-pro-03.jpg",
+        "category": "best-seller"
+    },
+    {
+        "id": 18,
+        "name": "Almond Milk",
+        "price": 4.99,
+        "sale_tag": null,
+        "image": "images/img-pro-03.jpg",
+        "category": "special-grid"
+    },
+    {
+        "id": 19,
+        "name": "Dark Chocolate 70%",
+        "price": 3.75,
+        "sale_tag": "Sale",
+        "image": "images/img-pro-03.jpg",
+        "category": "best-seller"
+    },
+    {
+        "id": 20,
+        "name": "Organic Honey",
+        "price": 11.20,
+        "sale_tag": null,
+        "image": "images/img-pro-03.jpg",
+        "category": "special-grid"
+    }
+]
