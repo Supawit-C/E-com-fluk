@@ -347,15 +347,33 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="special-menu text-center">
-                        <div class="button-group filter-button-group">
-                            <button class="active" data-filter="*">All</button>
-                            <button data-filter=".top-featured">Top featured</button>
-                            <button data-filter=".best-seller">Best seller</button>
+
+            <div class="row mb-4">
+                <div class="col-lg-4 col-md-12 col-sm-12 mb-3 mb-md-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchInput"
+                            placeholder="Search products by name...">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-danger text-white"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-3 mb-md-0">
+                    <select class="form-control" id="categoryDropdown">
+                        <option value="*">All Categories</option>
+                        <option value="best-seller">Best Seller</option>
+                        <option value="special-grid">Special Grid</option>
+                        <option value="top-featured">Top Featured</option>
+                    </select>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <select class="form-control" id="sortDropdown">
+                        <option value="default">Default Sorting</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="name-asc">Name: A - Z</option>
+                        <option value="name-desc">Name: Z - A</option>
+                    </select>
                 </div>
             </div>
 
@@ -629,6 +647,8 @@
     <script src="js/contact-form-script.js"></script>
     <script src="js/custom.js"></script>
     <script>
+        let allProducts = []; // ตัวแปรเก็บข้อมูลสินค้าทั้งหมดเพื่อใช้ในการ Search/Sort
+
         /**
          * Step 1: requestProducts() is called when the window finishes loading.
          * Its responsibility is to initiate the data fetching process and handle the data flow.
@@ -638,13 +658,14 @@
                 // Step 2: Fetch the product data from the JSON file.
                 // fetch() makes an asynchronous network request to the provided path.
                 const response = await fetch('data/json/products.json');
-                
+
                 if (!response.ok) throw new Error('ไม่สามารถโหลดข้อมูลสินค้าได้');
-                
+
                 // Parse the response body as JSON.
                 // The data flow continues here as we extract the products array from the response.
                 const products = await response.json();
-                
+                allProducts = products; // เก็บข้อมูลต้นฉบับไว้สำหรับการกรองและเรียงลำดับ
+
                 // Step 3: Pass the retrieved data to renderUI() to update the DOM.
                 renderUI(products);
             } catch (err) {
@@ -659,59 +680,129 @@
         function renderUI(products) {
             const container = document.getElementById('product-container');
             container.innerHTML = ''; // Clear any existing content
-            
-            // Loop through the data array to create individual product components
-            products.forEach((product) => {
-                const productDiv = document.createElement('div');
-                productDiv.className = 'col-lg-3 col-md-6 special-grid';
-                
-                // รองรับ category ทั้ง string และ array สำหรับใช้ในการ Filter
-                if (product.category) {
-                    if (Array.isArray(product.category)) {
-                        productDiv.className += ' ' + product.category.join(' ');
-                    } else {
-                        productDiv.className += ' ' + product.category;
+
+            if (products.length === 0) {
+                // กรณีไม่พบข้อมูลสินค้าให้แสดงข้อความแจ้งเตือน
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <h3 class="text-danger"><i class="fas fa-search-minus mb-3" style="font-size: 3rem;"></i><br>No product match</h3>
+                        <p class="text-muted">Please try again</p>
+                    </div>
+                `;
+            } else {
+                // Loop through the data array to create individual product components
+                products.forEach((product) => {
+                    const productDiv = document.createElement('div');
+                    productDiv.className = 'col-lg-3 col-md-6 special-grid';
+
+                    // รองรับ category ทั้ง string และ array สำหรับใช้ในการ Filter
+                    if (product.category) {
+                        if (Array.isArray(product.category)) {
+                            productDiv.className += ' ' + product.category.join(' ');
+                        } else {
+                            productDiv.className += ' ' + product.category;
+                        }
                     }
-                }
-                
-                // แทรกข้อมูลจาก Object (เช่นรูป, ชื่อ, ราคา) เข้าไปใน HTML template
-                productDiv.innerHTML = `
-            <div class="products-single fix">
-                <div class="box-img-hover">
-                    ${product.sale_tag ? `<div class='type-lb'><p class='sale'>${product.sale_tag}</p></div>` : ''}
-                    <img src="${product.image}" class="img-fluid" alt="${product.name}">
-                    <div class="mask-icon">
-                        <ul>
-                            <li><a href="#" data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a></li>
-                            <li><a href="#" data-toggle="tooltip" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                            <li><a href="#" data-toggle="tooltip" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                        </ul>
-                        <a class="cart" href="#">Add to Cart</a>
+
+                    // แทรกข้อมูลจาก Object (เช่นรูป, ชื่อ, ราคา) เข้าไปใน HTML template
+                    productDiv.innerHTML = `
+                <div class="products-single fix">
+                    <div class="box-img-hover">
+                        ${product.sale_tag ? `<div class='type-lb'><p class='sale'>${product.sale_tag}</p></div>` : ''}
+                        <img src="${product.image}" class="img-fluid" alt="${product.name}">
+                        <div class="mask-icon">
+                            <ul>
+                                <li><a href="#" data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                            </ul>
+                            <a class="cart" href="#">Add to Cart</a>
+                        </div>
+                    </div>
+                    <div class="why-text">
+                        <h4>${product.name}</h4>
+                        <h5> $${Number(product.price).toFixed(2)}</h5>
                     </div>
                 </div>
-                <div class="why-text">
-                    <h4>${product.name}</h4>
-                    <h5> $${Number(product.price).toFixed(2)}</h5>
-                </div>
-            </div>
-        `;
-                // Append the created element into the main container
-                container.appendChild(productDiv);
-            });
+            `;
+                    // Append the created element into the main container
+                    container.appendChild(productDiv);
+                });
+            }
 
             // Re-initialize Isotope if it was already initialized, or initialize it
             if ($.fn.isotope) {
-                var $grid = $('.special-list').isotope({
-                    itemSelector: '.special-grid'
-                });
-                // รีเฟรช layout หลังจากเพิ่ม element เข้าไปใหม่
-                $grid.isotope('reloadItems').isotope({ filter: '*' });
+                // Destroy old isotope instance if exists to prevent overlapping issues when re-rendering
+                if ($('.special-list').data('isotope')) {
+                    $('.special-list').isotope('destroy');
+                }
+
+                // เฉพาะตอนที่มีสินค้าถึงจะให้ Isotope จัดเรียง Grid ใหม่
+                if (products.length > 0) {
+                    var $grid = $('.special-list').isotope({
+                        itemSelector: '.special-grid'
+                    });
+                    $grid.isotope('reloadItems').isotope({ filter: '*' });
+                }
             }
+        }
+
+        /**
+         * ฟังก์ชันจัดการ Event สำหรับ Search Box และ Dropdown
+         */
+        function setupFilters() {
+            const searchInput = document.getElementById('searchInput');
+            const sortDropdown = document.getElementById('sortDropdown');
+            const categoryDropdown = document.getElementById('categoryDropdown');
+
+            const applyFilters = () => {
+                // เริ่มต้นด้วยข้อมูลทั้งหมด
+                let filteredProducts = [...allProducts];
+
+                // 1. กรองข้อมูลจาก Category
+                const categoryValue = categoryDropdown.value;
+                if (categoryValue !== '*') {
+                    filteredProducts = filteredProducts.filter(p => {
+                        if (!p.category) return false;
+                        if (Array.isArray(p.category)) {
+                            return p.category.includes(categoryValue);
+                        }
+                        return p.category.includes(categoryValue);
+                    });
+                }
+
+                // 2. กรองข้อมูลจาก Search Box (ค้นหาตามชื่อ)
+                const searchTerm = searchInput.value.toLowerCase();
+                if (searchTerm) {
+                    filteredProducts = filteredProducts.filter(p => p.name.toLowerCase().includes(searchTerm));
+                }
+
+                // 3. จัดเรียงข้อมูลจาก Dropdown
+                const sortValue = sortDropdown.value;
+                if (sortValue === 'price-asc') {
+                    filteredProducts.sort((a, b) => a.price - b.price); // ราคาต่ำ-สูง
+                } else if (sortValue === 'price-desc') {
+                    filteredProducts.sort((a, b) => b.price - a.price); // ราคาสูง-ต่ำ
+                } else if (sortValue === 'name-asc') {
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name)); // ชื่อ A-Z
+                } else if (sortValue === 'name-desc') {
+                    filteredProducts.sort((a, b) => b.name.localeCompare(a.name)); // ชื่อ Z-A
+                }
+
+                // อัปเดตหน้าจอด้วยข้อมูลที่ถูกกรอง/เรียงลำดับแล้ว
+                renderUI(filteredProducts);
+            };
+
+            // เมื่อพิมพ์ช่อง Search หรือเปลี่ยน Dropdown ให้เรียก applyFilters
+            searchInput.addEventListener('input', applyFilters);
+            sortDropdown.addEventListener('change', applyFilters);
+            categoryDropdown.addEventListener('change', applyFilters);
         }
 
         // Trigger the process when the page is fully loaded
         window.onload = function () {
             requestProducts();
+            setupFilters();
         };
     </script>
 </body>
