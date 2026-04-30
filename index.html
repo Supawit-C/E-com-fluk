@@ -194,9 +194,9 @@
                 <div class="attr-nav">
                     <ul>
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><a href="#">
+                        <li class="side-menu"><a href="cart.html">
                                 <i class="fa fa-shopping-bag"></i>
-                                <span class="badge">3</span>
+                                <span class="badge" id="cart-badge">0</span>
                             </a></li>
                     </ul>
                 </div>
@@ -206,25 +206,10 @@
             <div class="side">
                 <a href="#" class="close-side"><i class="fa fa-times"></i></a>
                 <li class="cart-box">
-                    <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
+                    <ul class="cart-list" id="side-cart-list">
                         <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
+                            <a href="cart.html" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <span class="float-right"><strong>Total</strong>: <span id="side-cart-total">$ 0.00</span></span>
                         </li>
                     </ul>
                 </li>
@@ -648,6 +633,31 @@
     <script src="js/custom.js"></script>
     <script>
         let allProducts = []; // ตัวแปรเก็บข้อมูลสินค้าทั้งหมดเพื่อใช้ในการ Search/Sort
+        let cart = [];        // ตัวแปรเก็บข้อมูลสินค้าในตะกร้า (Array)
+
+        /**
+         * ฟังก์ชัน loadCart() ตรวจสอบข้อมูลใน Local Storage
+         * และดึงกลับมาเก็บไว้ในตัวแปร cart
+         */
+        function loadCart() {
+            let storedCart = localStorage.getItem('cart');
+            if (storedCart) {
+                try {
+                    let parsedCart = JSON.parse(storedCart);
+                    // ตรวจสอบความถูกต้องของข้อมูล (ต้องเป็น Array)
+                    if (Array.isArray(parsedCart)) {
+                        cart = parsedCart;
+                    } else {
+                        cart = []; // ถ้าเป็นรูปแบบเก่า (Object) ให้รีเซ็ตเป็น Array เปล่า
+                    }
+                } catch (err) {
+                    console.error("Error parsing cart data:", err);
+                    cart = [];
+                }
+            } else {
+                cart = [];
+            }
+        }
 
         /**
          * Step 1: requestProducts() is called when the window finishes loading.
@@ -679,7 +689,10 @@
          */
         function renderUI(products) {
             const container = document.getElementById('product-container');
-            container.innerHTML = ''; // Clear any existing content
+            if (!container) return;
+
+            // ล้างข้อมูลเก่าออกก่อน
+            container.innerHTML = '';
 
             if (products.length === 0) {
                 // กรณีไม่พบข้อมูลสินค้าให้แสดงข้อความแจ้งเตือน
@@ -693,9 +706,10 @@
                 // Loop through the data array to create individual product components
                 products.forEach((product) => {
                     const productDiv = document.createElement('div');
+                    // กำหนดคลาสพื้นฐานสำหรับ Grid และ Isotope
                     productDiv.className = 'col-lg-3 col-md-6 special-grid';
 
-                    // รองรับ category ทั้ง string และ array สำหรับใช้ในการ Filter
+                    // เพิ่มคลาส Category เพื่อรองรับการทำ Filter
                     if (product.category) {
                         if (Array.isArray(product.category)) {
                             productDiv.className += ' ' + product.category.join(' ');
@@ -706,43 +720,43 @@
 
                     // แทรกข้อมูลจาก Object (เช่นรูป, ชื่อ, ราคา) เข้าไปใน HTML template
                     productDiv.innerHTML = `
-                <div class="products-single fix">
-                    <div class="box-img-hover">
-                        ${product.sale_tag ? `<div class='type-lb'><p class='sale'>${product.sale_tag}</p></div>` : ''}
-                        <img src="${product.image}" class="img-fluid" alt="${product.name}">
-                        <div class="mask-icon">
-                            <ul>
-                                <li><a href="#" data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                            </ul>
-                            <a class="cart" href="#">Add to Cart</a>
+                        <div class="products-single fix">
+                            <div class="box-img-hover">
+                                ${product.sale_tag ? `<div class='type-lb'><p class='sale'>${product.sale_tag}</p></div>` : ''}
+                                <img src="${product.image}" class="img-fluid" alt="${product.name}">
+                                <div class="mask-icon">
+                                    <ul>
+                                        <li><a href="#" data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                    </ul>
+                                    <a class="cart add-to-cart" href="#" data-id="${product.id}">Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="why-text">
+                                <h4>${product.name}</h4>
+                                <h5> $${Number(product.price).toFixed(2)}</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="why-text">
-                        <h4>${product.name}</h4>
-                        <h5> $${Number(product.price).toFixed(2)}</h5>
-                    </div>
-                </div>
-            `;
+                    `;
                     // Append the created element into the main container
                     container.appendChild(productDiv);
                 });
-            }
 
-            // Re-initialize Isotope if it was already initialized, or initialize it
-            if ($.fn.isotope) {
-                // Destroy old isotope instance if exists to prevent overlapping issues when re-rendering
-                if ($('.special-list').data('isotope')) {
-                    $('.special-list').isotope('destroy');
-                }
-
-                // เฉพาะตอนที่มีสินค้าถึงจะให้ Isotope จัดเรียง Grid ใหม่
-                if (products.length > 0) {
-                    var $grid = $('.special-list').isotope({
-                        itemSelector: '.special-grid'
+                // Re-initialize Isotope หลังจากที่รูปภาพโหลดเสร็จแล้ว เพื่อป้องกันการซ้อนทับกัน (Layout Overlap)
+                if ($.fn.isotope) {
+                    const $grid = $(container);
+                    $grid.imagesLoaded(function () {
+                        // ถ้ามี Isotope ตัวเก่าอยู่ให้ลบออกก่อน
+                        if ($grid.data('isotope')) {
+                            $grid.isotope('destroy');
+                        }
+                        // เริ่มต้น Isotope ใหม่
+                        $grid.isotope({
+                            itemSelector: '.special-grid',
+                            layoutMode: 'fitRows'
+                        });
                     });
-                    $grid.isotope('reloadItems').isotope({ filter: '*' });
                 }
             }
         }
@@ -799,10 +813,75 @@
             categoryDropdown.addEventListener('change', applyFilters);
         }
 
+        /**
+         * ฟังก์ชันจัดการ Event Delegation สำหรับปุ่ม Add to Cart
+         * เราดักฟังที่ตัวแม่ (#product-container) แทนการดักที่ปุ่มโดยตรง เพื่อรองรับสินค้าที่ถูกสร้างขึ้นใหม่แบบ Dynamic
+         */
+        function setupCartListener() {
+            const container = document.getElementById('product-container');
+
+            // ใช้ Event Delegation ฟังเหตุการณ์ click ที่ตัวแม่ (#product-container)
+            container.addEventListener('click', function (event) {
+                // ตรวจสอบว่าตัวที่ถูกคลิก (หรือตัวที่ Event พุ่งขึ้นมาหา) มีคลาส .add-to-cart หรือไม่
+                if (event.target && event.target.classList.contains('add-to-cart')) {
+                    event.preventDefault(); // ป้องกันการรีเฟรชหน้าเว็บหรือการทำงานปกติของ tag <a>
+
+                    // ดึงค่า data-id (Product ID) ที่เราฝังไว้ใน attribute ออกมา
+                    const productId = event.target.getAttribute('data-id');
+
+                    // ส่ง ID ไปให้ฟังก์ชัน addToCart จัดการต่อ
+                    addToCart(productId);
+                }
+            });
+        }
+
+        /**
+         * ฟังก์ชัน addToCart จัดการข้อมูลตะกร้าสินค้าแบบ Array
+         * @param {string|number} productID - รหัสสินค้าที่ต้องการเพิ่ม
+         */
+        function addToCart(productID) {
+            // ใช้ .find() ตรวจสอบว่ามีสินค้านี้อยู่ในตะกร้า (Array) แล้วหรือยัง
+            let item = cart.find(p => p.id == productID);
+
+            if (item) {
+                // ถ้ามีสินค้าอยู่แล้ว ให้เพิ่มจำนวน (quantity) ขึ้น 1
+                item.quantity++;
+            } else {
+                // ถ้ายังไม่มี ให้ค้นหาข้อมูลสินค้าตัวนั้นจาก allProducts มาเก็บไว้ในตะกร้า
+                let product = allProducts.find(p => p.id == productID);
+                if (product) {
+                    // push สินค้าใหม่เข้าไปใน array โดยเพิ่ม property quantity: 1
+                    cart.push({ ...product, quantity: 1 });
+                }
+            }
+
+            // บันทึกข้อมูลตะกร้าสินค้า (Array) ลงใน localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // อัปเดตตัวเลข Badge ใน Header ทันที
+            updateHeaderCart();
+
+            console.log("Current Cart Data (Array):", cart);
+            alert("เพิ่มสินค้าลงตะกร้าเรียบร้อยแล้ว!\n(ตรวจสอบข้อมูลได้ในหน้า Cart)");
+        }
+
+        /**
+         * อัปเดตข้อมูลตะกร้าในส่วน Header
+         */
+        function updateHeaderCart() {
+            const cartBadge = document.getElementById('cart-badge');
+            if (cartBadge) {
+                cartBadge.innerText = cart.length;
+            }
+        }
+
         // Trigger the process when the page is fully loaded
         window.onload = function () {
-            requestProducts();
-            setupFilters();
+            loadCart();          // ดึงข้อมูลตะกร้าจาก Local Storage
+            requestProducts();   // ดึงข้อมูลสินค้าจาก JSON
+            setupFilters();      // เตรียมระบบค้นหาและกรอง
+            setupCartListener(); // เตรียมระบบฟังการคลิกเพิ่มสินค้า
+            updateHeaderCart();   // อัปเดตตัวเลข Badge ใน Header
         };
     </script>
 </body>

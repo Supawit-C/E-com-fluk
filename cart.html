@@ -76,10 +76,10 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="custom-select-box">
                         <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-						<option>¥ JPY</option>
-						<option>$ USD</option>
-						<option>€ EUR</option>
-					</select>
+                            <option>¥ JPY</option>
+                            <option>$ USD</option>
+                            <option>€ EUR</option>
+                        </select>
                     </div>
                     <div class="right-phone-box">
                         <p>Call US :- <a href="#"> +11 900 800 100</a></p>
@@ -104,9 +104,10 @@
             <div class="container">
                 <!-- Start Header Navigation -->
                 <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu"
+                        aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
                     <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
@@ -193,10 +194,10 @@
                 <div class="attr-nav">
                     <ul>
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><a href="#">
-						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
-					</a></li>
+                        <li class="side-menu"><a href="cart.html">
+                                <i class="fa fa-shopping-bag"></i>
+                                <span class="badge" id="cart-badge">0</span>
+                            </a></li>
                     </ul>
                 </div>
                 <!-- End Atribute Navigation -->
@@ -205,25 +206,12 @@
             <div class="side">
                 <a href="#" class="close-side"><i class="fa fa-times"></i></a>
                 <li class="cart-box">
-                    <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
+                    <ul class="cart-list" id="side-cart-list">
+                        <!-- รายการสินค้าในเมนูด้านข้างจะถูกเติมด้วย JavaScript (ถ้าต้องการ) -->
                         <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
+                            <a href="cart.html" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <span class="float-right"><strong>Total</strong>: <span id="side-cart-total">$
+                                    0.00</span></span>
                         </li>
                     </ul>
                 </li>
@@ -279,79 +267,8 @@
                                     <th>Remove</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="images/img-pro-01.jpg" alt="" />
-								</a>
-                                    </td>
-                                    <td class="name-pr">
-                                        <a href="#">
-									Lorem ipsum dolor sit amet
-								</a>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p>$ 80.0</p>
-                                    </td>
-                                    <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                    <td class="total-pr">
-                                        <p>$ 80.0</p>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="#">
-									<i class="fas fa-times"></i>
-								</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="images/img-pro-02.jpg" alt="" />
-								</a>
-                                    </td>
-                                    <td class="name-pr">
-                                        <a href="#">
-									Lorem ipsum dolor sit amet
-								</a>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p>$ 60.0</p>
-                                    </td>
-                                    <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                    <td class="total-pr">
-                                        <p>$ 80.0</p>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="#">
-									<i class="fas fa-times"></i>
-								</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="images/img-pro-03.jpg" alt="" />
-								</a>
-                                    </td>
-                                    <td class="name-pr">
-                                        <a href="#">
-									Lorem ipsum dolor sit amet
-								</a>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p>$ 30.0</p>
-                                    </td>
-                                    <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                    <td class="total-pr">
-                                        <p>$ 80.0</p>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="#">
-									<i class="fas fa-times"></i>
-								</a>
-                                    </td>
-                                </tr>
+                            <tbody id="cart-items">
+                                <!-- Cart items will be loaded here via JavaScript -->
                             </tbody>
                         </table>
                     </div>
@@ -362,7 +279,8 @@
                 <div class="col-lg-6 col-sm-6">
                     <div class="coupon-box">
                         <div class="input-group input-group-sm">
-                            <input class="form-control" placeholder="Enter your coupon code" aria-label="Coupon code" type="text">
+                            <input class="form-control" placeholder="Enter your coupon code" aria-label="Coupon code"
+                                type="text">
                             <div class="input-group-append">
                                 <button class="btn btn-theme" type="button">Apply Coupon</button>
                             </div>
@@ -383,33 +301,18 @@
                         <h3>Order summary</h3>
                         <div class="d-flex">
                             <h4>Sub Total</h4>
-                            <div class="ml-auto font-weight-bold"> $ 130 </div>
-                        </div>
-                        <div class="d-flex">
-                            <h4>Discount</h4>
-                            <div class="ml-auto font-weight-bold"> $ 40 </div>
-                        </div>
-                        <hr class="my-1">
-                        <div class="d-flex">
-                            <h4>Coupon Discount</h4>
-                            <div class="ml-auto font-weight-bold"> $ 10 </div>
-                        </div>
-                        <div class="d-flex">
-                            <h4>Tax</h4>
-                            <div class="ml-auto font-weight-bold"> $ 2 </div>
-                        </div>
-                        <div class="d-flex">
-                            <h4>Shipping Cost</h4>
-                            <div class="ml-auto font-weight-bold"> Free </div>
+                            <div class="ml-auto font-weight-bold" id="sub-total"> $ 0 </div>
                         </div>
                         <hr>
                         <div class="d-flex gr-total">
                             <h5>Grand Total</h5>
-                            <div class="ml-auto h5"> $ 388 </div>
+                            <div class="ml-auto h5" id="grand-total"> $ 0 </div>
                         </div>
-                        <hr> </div>
+                        <hr>
+                    </div>
                 </div>
-                <div class="col-12 d-flex shopping-box"><a href="checkout.html" class="ml-auto btn hvr-hover">Checkout</a> </div>
+                <div class="col-12 d-flex shopping-box"><a href="checkout.html"
+                        class="ml-auto btn hvr-hover">Checkout</a> </div>
             </div>
 
         </div>
@@ -512,8 +415,10 @@
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-widget">
                             <h4>About ThewayShop</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </p>
                             <ul>
                                 <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
@@ -543,13 +448,16 @@
                             <h4>Contact Us</h4>
                             <ul>
                                 <li>
-                                    <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
+                                    <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston
+                                        Street Wichita,<br> KS 67213 </p>
                                 </li>
                                 <li>
-                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
+                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705
+                                            770</a></p>
                                 </li>
                                 <li>
-                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
+                                    <p><i class="fas fa-envelope"></i>Email: <a
+                                            href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
                                 </li>
                             </ul>
                         </div>
@@ -563,7 +471,8 @@
     <!-- Start copyright  -->
     <div class="footer-copyright">
         <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
-            <a href="https://html.design/">html design</a></p>
+            <a href="https://html.design/">html design</a>
+        </p>
     </div>
     <!-- End copyright  -->
 
@@ -585,6 +494,139 @@
     <script src="js/form-validator.min.js"></script>
     <script src="js/contact-form-script.js"></script>
     <script src="js/custom.js"></script>
+    <script>
+        /**
+         * ฟังก์ชันโหลดข้อมูลสินค้าในตะกร้าและวาด UI
+         */
+        async function loadCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const subTotalElement = document.getElementById('sub-total');
+            const grandTotalElement = document.getElementById('grand-total');
+
+            // 1. ดึงข้อมูล Cart จาก localStorage
+            // ตรวจสอบว่าเป็น Array หรือไม่ เพื่อป้องกัน Error จากข้อมูลเก่า (Migration Fix)
+            let storedCart = localStorage.getItem('cart');
+            let cart = [];
+            try {
+                let parsedCart = JSON.parse(storedCart);
+                cart = Array.isArray(parsedCart) ? parsedCart : [];
+            } catch (err) {
+                cart = [];
+            }
+
+            // 2. โหลดข้อมูลสินค้าทั้งหมดจาก JSON เพื่อเอาชื่อและราคามาแสดง
+            try {
+                const response = await fetch('data/json/products.json');
+                const products = await response.json();
+
+                let subTotal = 0;
+                cartItemsContainer.innerHTML = '';
+
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<tr><td colspan="6" class="text-center py-5"><h3>ตะกร้าของคุณว่างเปล่า</h3><a href="shop.html" class="btn btn-theme">ไปช้อปปิ้งกันเลย</a></td></tr>';
+                    subTotalElement.innerText = '$ 0.00';
+                    grandTotalElement.innerText = '$ 0.00';
+
+                    // รีเซ็ตตัวเลขใน Header
+                    if (document.getElementById('cart-badge')) document.getElementById('cart-badge').innerText = '0';
+                    if (document.getElementById('side-cart-total')) document.getElementById('side-cart-total').innerText = '$ 0.00';
+                    return;
+                }
+
+                // 3. วนลูปข้อมูลในตะกร้า (Array) และสร้างแถวตาราง (Table Row)
+                cart.forEach(item => {
+                    const product = products.find(p => p.id == item.id);
+                    if (product) {
+                        const quantity = item.quantity;
+                        const total = product.price * quantity;
+                        subTotal += total;
+
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td class="thumbnail-img">
+                                <a href="#"><img class="img-fluid" src="${product.image}" alt="" /></a>
+                            </td>
+                            <td class="name-pr">
+                                <a href="#">${product.name}</a>
+                            </td>
+                            <td class="price-pr">
+                                <p>$ ${Number(product.price).toFixed(2)}</p>
+                            </td>
+                            <td class="quantity-box">
+                                <input type="number" size="4" value="${quantity}" min="1" step="1" class="c-input-text qty text" data-id="${product.id}">
+                            </td>
+                            <td class="total-pr">
+                                <p>$ ${total.toFixed(2)}</p>
+                            </td>
+                            <td class="remove-pr">
+                                <a href="#" class="remove-item" data-id="${product.id}">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </td>
+                        `;
+                        cartItemsContainer.appendChild(tr);
+                    }
+                });
+
+                // 4. อัปเดตตัวเลขสรุปยอดเงิน
+                subTotalElement.innerText = `$ ${subTotal.toFixed(2)}`;
+                grandTotalElement.innerText = `$ ${subTotal.toFixed(2)}`;
+
+                // อัปเดตตัวเลขใน Header (Badge และ Side Total)
+                const cartBadge = document.getElementById('cart-badge');
+                if (cartBadge) cartBadge.innerText = cart.length;
+
+                const sideCartTotal = document.getElementById('side-cart-total');
+                if (sideCartTotal) sideCartTotal.innerText = `$ ${subTotal.toFixed(2)}`;
+
+                // ผูก Event สำหรับปุ่มเพิ่มลดจำนวน และปุ่มลบ
+                setupCartActions();
+
+            } catch (error) {
+                console.error("Error loading cart:", error);
+            }
+        }
+
+        /**
+         * ฟังก์ชันจัดการ Event สำหรับปุ่มต่างๆ ในหน้า Cart
+         */
+        function setupCartActions() {
+            // เมื่อมีการเปลี่ยนจำนวนสินค้า (Quantity Change)
+            document.querySelectorAll('.qty').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    const id = e.target.getAttribute('data-id');
+                    const newQty = parseInt(e.target.value);
+
+                    if (newQty > 0) {
+                        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                        const item = cart.find(p => p.id == id);
+                        if (item) {
+                            item.quantity = newQty;
+                            localStorage.setItem('cart', JSON.stringify(cart));
+                            loadCart();
+                        }
+                    }
+                });
+            });
+
+            // เมื่อคลิกปุ่มลบสินค้า (Remove Item)
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const id = btn.getAttribute('data-id');
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                    // ใช้ .filter() เพื่อเอาสินค้าตัวที่ระบุ ID ออกไปจาก Array
+                    cart = cart.filter(p => p.id != id);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    loadCart(); // วาด UI ใหม่
+                });
+            });
+        }
+
+        // เรียกใช้งานฟังก์ชันเมื่อโหลดหน้าเว็บเสร็จ
+        window.onload = loadCart;
+    </script>
 </body>
 
 </html>
