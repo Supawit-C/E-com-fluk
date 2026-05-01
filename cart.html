@@ -514,9 +514,9 @@
                 cart = [];
             }
 
-            // 2. โหลดข้อมูลสินค้าทั้งหมดจาก JSON เพื่อเอาชื่อและราคามาแสดง
+            // 2. โหลดข้อมูลสินค้าทั้งหมดจาก API
             try {
-                const response = await fetch('data/json/products.json');
+                const response = await fetch('http://localhost:3000/api/products');
                 const products = await response.json();
 
                 let subTotal = 0;

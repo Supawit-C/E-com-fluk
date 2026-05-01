@@ -665,9 +665,8 @@
          */
         async function requestProducts() {
             try {
-                // Step 2: Fetch the product data from the JSON file.
-                // fetch() makes an asynchronous network request to the provided path.
-                const response = await fetch('data/json/products.json');
+                // Step 2: Fetch the product data from the API.
+                const response = await fetch('http://localhost:3000/api/products');
 
                 if (!response.ok) throw new Error('ไม่สามารถโหลดข้อมูลสินค้าได้');
 
