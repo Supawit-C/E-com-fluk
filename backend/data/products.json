@@ -158,5 +158,13 @@
         "sale_tag": null,
         "image": "images/img-pro-03.jpg",
         "category": "special-grid"
+    },
+    {
+        "id": 21,
+        "name": "Cool Hat",
+        "price": 25.00,
+        "sale_tag": "New",
+        "image": "images/img-pro-01.jpg",
+        "category": "special-grid"
     }
 ]

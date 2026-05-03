@@ -360,6 +360,14 @@
                         <option value="name-desc">Name: Z - A</option>
                     </select>
                 </div>
+            </div> <!-- เพิ่ม </div> เพื่อปิด row ของส่วน Filter -->
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <button id="fetch-hat-btn" class="btn btn-dark" style="font-size: 1.2rem; border-radius: 50px; padding: 10px 30px; background: #b0b435; border: none; transition: 0.3s;">
+                        🎓 Get Special Hat (Request Envelope)
+                    </button>
+                    <p class="mt-2 text-muted">Sends a request with a "secret-key" in the envelope header</p>
+                </div>
             </div>
 
             <div class="row special-list" id="product-container">
@@ -874,12 +882,59 @@
             }
         }
 
+        /**
+         * ฟังก์ชันจัดการ Hat Scenario:
+         * 1. Trigger: User คลิกปุ่ม "Hat"
+         * 2. Request: Browser ส่ง "Envelope" (พร้อม Secret Header) ไปยัง Server
+         * 3. Response: รับ "Package" (JSON) กลับมาแสดงผล
+         */
+        function setupHatTrigger() {
+            const hatBtn = document.getElementById('fetch-hat-btn');
+            if (!hatBtn) return;
+
+            // [TRIGGER]: เมื่อ User คลิกปุ่ม
+            hatBtn.addEventListener('click', async function () {
+                console.log("Trigger: User clicked the Hat button.");
+
+                try {
+                    // [REQUEST]: Browser ส่งซองจดหมาย (Fetch Request) ไปที่ Server
+                    // มีการใส่ "x-envelope-token" ใน Headers เพื่อใช้เป็นกุญแจผ่านประตู
+                    const response = await fetch('http://localhost:3000/api/products/hat', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-envelope-token': 'secret-key' // "กุญแจ" ในซองจดหมาย
+                        }
+                    });
+
+                    // [RESPONSE]: รอรับ Package (JSON) และ Status จาก Server
+                    const data = await response.json();
+
+                    if (data.status === 'Success') {
+                        // หาก Server ตอบกลับว่า Success
+                        const hatProduct = data.package;
+                        alert(`Server Response: ${data.status}\n\nGatekeeper passed! Received package: ${hatProduct.name}`);
+                        
+                        // [UI UPDATE]: เพิ่มหมวกเข้าไปในรายการสินค้าทั้งหมด (ไม่ต้องล้างของเก่า)
+                        allProducts.push(hatProduct);
+                        renderUI(allProducts); 
+                    } else {
+                        alert(`Server Response: ${data.status}\n\nGatekeeper Error: ${data.message}`);
+                    }
+                } catch (error) {
+                    console.error('Error fetching hat:', error);
+                    alert('Error connecting to Server.');
+                }
+            });
+        }
+
         // Trigger the process when the page is fully loaded
         window.onload = function () {
             loadCart();          // ดึงข้อมูลตะกร้าจาก Local Storage
             requestProducts();   // ดึงข้อมูลสินค้าจาก JSON
             setupFilters();      // เตรียมระบบค้นหาและกรอง
             setupCartListener(); // เตรียมระบบฟังการคลิกเพิ่มสินค้า
+            setupHatTrigger();    // เตรียมระบบคลิกหมวก (Trigger/Request/Processing/Response)
             updateHeaderCart();   // อัปเดตตัวเลข Badge ใน Header
         };
     </script>

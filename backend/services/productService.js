@@ -16,6 +16,20 @@ const getAllProducts = () => {
     }
 };
 
+/**
+ * Service สำหรับดึงข้อมูลหมวกโดยเฉพาะ
+ */
+const getHatProduct = () => {
+    try {
+        const products = getAllProducts();
+        // ค้นหาหมวกที่ชื่อ "Cool Hat" ในฐานข้อมูล JSON
+        return products.find(p => p.name === 'Cool Hat');
+    } catch (error) {
+        throw new Error('Could not find Hat product');
+    }
+};
+
 module.exports = {
-    getAllProducts
+    getAllProducts,
+    getHatProduct
 };
