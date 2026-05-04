@@ -1,0 +1,62 @@
+[
+  {
+    "username": "john.doe@example.com",
+    "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+    "first_name": "John",
+    "registration_date": "2024-01-15T10:30:00Z"
+  },
+  {
+    "username": "jane.smith@example.com",
+    "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+    "first_name": "Jane",
+    "registration_date": "2024-02-10T14:20:00Z"
+  },
+  {
+    "username": "alex.brown@example.com",
+    "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+    "first_name": "Alex",
+    "registration_date": "2024-03-05T09:15:00Z"
+  },
+  {
+    "username": "sarah.wilson@example.com",
+    "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+    "first_name": "Sarah",
+    "registration_date": "2024-03-20T16:45:00Z"
+  },
+  {
+    "username": "mike.johnson@example.com",
+    "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+    "first_name": "Mike",
+    "registration_date": "2024-04-02T11:00:00Z"
+  },
+  {
+    "username": "emily.davis@example.com",
+    "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+    "first_name": "Emily",
+    "registration_date": "2024-04-12T08:30:00Z"
+  },
+  {
+    "username": "chris.evans@example.com",
+    "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+    "first_name": "Chris",
+    "registration_date": "2024-04-25T13:10:00Z"
+  },
+  {
+    "username": "olivia.taylor@example.com",
+    "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+    "first_name": "Olivia",
+    "registration_date": "2024-05-01T15:55:00Z"
+  },
+  {
+    "username": "daniel.lee@example.com",
+    "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+    "first_name": "Daniel",
+    "registration_date": "2024-05-03T10:20:00Z"
+  },
+  {
+    "username": "sophia.martinez@example.com",
+    "password_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+    "first_name": "Sophia",
+    "registration_date": "2024-05-04T09:00:00Z"
+  }
+]

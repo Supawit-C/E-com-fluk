@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "username": "john.doe@example.com",
+    "password_hash": "$2b$10$CMJQ9/EXFDCKTPjaHsPjn.z.95yso9RcEEn2Tidp0268Hl.wvFzxi",
+    "first_name": "john"
+  },
+  {
+    "id": 2,
+    "username": "jane.smith@example.com",
+    "password_hash": "$2b$10$bVl9HdakGv9SYGfwPoJ4KewK6Fwdzdy7qrY3/xMmwDIY59AuEyRHW",
+    "first_name": "jane"
+  },
+  {
+    "id": 3,
+    "username": "alex.brown@example.com",
+    "password_hash": "$2b$10$tGMKRM71uMf56A9Q.eU20uwq6wcQn5eADTa/DssmJqfXm9xB8bKZa",
+    "first_name": "alex"
+  },
+  {
+    "id": 4,
+    "username": "sarah.wilson@example.com",
+    "password_hash": "$2b$10$NSH7R86ucjBI1mqGNyXJ9.zWHj4yqNN5xOMCbzC8E2u56548xpsHy",
+    "first_name": "sarah"
+  },
+  {
+    "id": 5,
+    "username": "mike.johnson@example.com",
+    "password_hash": "$2b$10$wQnNrt5.YePPUByPkIdZ5eTv6uvGet.xPsdeqvG7AyOX8GmsE80fO",
+    "first_name": "mike"
+  },
+  {
+    "id": 6,
+    "username": "emily.davis@example.com",
+    "password_hash": "$2b$10$JK.mtDI7AJ.W.fUsWnlCQu5RJb33.0NHbMWraMHibPmM5XbLACfge",
+    "first_name": "emily"
+  },
+  {
+    "id": 7,
+    "username": "chris.evans@example.com",
+    "password_hash": "$2b$10$HhOJPlZ8BsV.VbzkGPBVF.oxd4cHuXMhNTl.3Bc3Ki5kOLoLrCIvG",
+    "first_name": "chris"
+  },
+  {
+    "id": 8,
+    "username": "olivia.taylor@example.com",
+    "password_hash": "$2b$10$U7iyHxgUW/1d8S5ydepdm.xQ4/4ZjPPSmxgfvRIG10ntQSDMMLEZm",
+    "first_name": "olivia"
+  },
+  {
+    "id": 9,
+    "username": "daniel.lee@example.com",
+    "password_hash": "$2b$10$aDHGrtdWnFG8P4.uIRhCOOid31.su1yTdVq6V5NiRZKkPw88JqSqW",
+    "first_name": "daniel"
+  },
+  {
+    "id": 10,
+    "username": "sophia.martinez@example.com",
+    "password_hash": "$2b$10$iq8.2okhT7N9e/6fzOF7A.mBH/mNinqz5WiIgMlavou6OmgFkSlGW",
+    "first_name": "sophia"
+  }
+]

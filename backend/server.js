@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors'); // Added CORS
 const productRoutes = require('./routes/productRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,8 +11,8 @@ app.use(express.json());
 app.use(cors()); // Enable CORS for all routes
 
 // Main Routes
-// Mounting product routes under /api/products
 app.use('/api/products', productRoutes);
+app.use('/api/auth', authRoutes);
 
 // Basic health check route
 app.get('/', (req, res) => {
