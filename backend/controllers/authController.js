@@ -5,6 +5,7 @@ const path = require('path');
 
 // Path to users data
 const usersFilePath = path.join(__dirname, '../data/users.json');
+const authUserFilePath = path.join(__dirname, '../data/auth_user.json');
 
 /**
  * Security Note:
@@ -29,8 +30,15 @@ const login = async (req, res) => {
             return res.status(400).json({ message: 'กรุณากรอกอีเมลและรหัสผ่าน' });
         }
 
-        // ขั้นตอนที่ 2: ค้นหาผู้ใช้จากฐานข้อมูล (Mock Data)
-        const usersData = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
+        // ขั้นตอนที่ 2: ค้นหาผู้ใช้จากฐานข้อมูล (รวมทั้ง users.json และ auth_user.json)
+        let usersData = [];
+        if (fs.existsSync(usersFilePath)) {
+            usersData = usersData.concat(JSON.parse(fs.readFileSync(usersFilePath, 'utf-8')));
+        }
+        if (fs.existsSync(authUserFilePath)) {
+            usersData = usersData.concat(JSON.parse(fs.readFileSync(authUserFilePath, 'utf-8')));
+        }
+
         const user = usersData.find(u => u.username === email);
 
         // ขั้นตอนที่ 3: ตรวจสอบว่ามีอีเมลนี้หรือไม่
@@ -67,6 +75,58 @@ const login = async (req, res) => {
     }
 };
 
+const register = async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: 'กรุณากรอกข้อมูลให้ครบถ้วน' });
+        }
+
+        let usersData = [];
+        try {
+            if (fs.existsSync(authUserFilePath)) {
+                usersData = JSON.parse(fs.readFileSync(authUserFilePath, 'utf-8'));
+            } else {
+                fs.writeFileSync(authUserFilePath, JSON.stringify([]));
+            }
+        } catch (e) {
+            console.error('Error reading auth_user.json:', e);
+        }
+
+        // ตรวจสอบอีเมลซ้ำในทั้งสองไฟล์
+        let allUsers = [...usersData];
+        if (fs.existsSync(usersFilePath)) {
+            const defaultUsers = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
+            allUsers = allUsers.concat(defaultUsers);
+        }
+
+        const userExists = allUsers.find(u => u.username === email);
+        if (userExists) {
+            return res.status(400).json({ message: 'อีเมลนี้ถูกใช้งานแล้ว' });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const password_hash = await bcrypt.hash(password, salt);
+
+        const newUser = {
+            id: Date.now().toString(),
+            name,
+            username: email,
+            password_hash
+        };
+
+        usersData.push(newUser);
+        fs.writeFileSync(authUserFilePath, JSON.stringify(usersData, null, 2));
+
+        return res.status(201).json({ message: 'ลงทะเบียนสำเร็จ' });
+    } catch (error) {
+        console.error('Register error:', error);
+        return res.status(500).json({ message: 'เกิดข้อผิดพลาดภายในระบบ' });
+    }
+};
+
 module.exports = {
-    login
+    login,
+    register
 };

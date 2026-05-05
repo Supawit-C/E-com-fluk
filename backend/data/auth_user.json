@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1777992297830",
+    "name": "Test User",
+    "username": "test1@example.com",
+    "password_hash": "$2b$10$IHWAE5E1Zoq4et0Up1o12eiBr9MuzRK5xYx1C3kzSsA1ICh.oBmgy"
+  },
+  {
+    "id": "1777992365861",
+    "name": "Yaimakmak",
+    "username": "supawitchairat@gmail.com",
+    "password_hash": "$2b$10$rfxhav42X9QB5GyPUx09vuYSwOEzT1HVAqsJbszCNJcxML0YixAeq"
+  },
+  {
+    "id": "1777993702159",
+    "name": "Yaimakmak",
+    "username": "suawitchairat@gmail.com",
+    "password_hash": "$2b$10$dm5oa0SSJUzOJnjv1UULN.iT6QOUPmr8y8mS4vVyPhsTbtGbCCCKO"
+  }
+]
