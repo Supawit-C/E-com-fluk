@@ -744,6 +744,9 @@
                             <div class="why-text">
                                 <h4>${product.name}</h4>
                                 <h5> $${Number(product.price).toFixed(2)}</h5>
+                                <p class="stock-info ${product.stock <= 5 ? 'text-danger' : 'text-muted'}">
+                                    <i class="fas fa-boxes"></i> Stock: <strong>${product.stock}</strong>
+                                </p>
                             </div>
                         </div>
                     `;
@@ -851,16 +854,23 @@
             // ใช้ .find() ตรวจสอบว่ามีสินค้านี้อยู่ในตะกร้า (Array) แล้วหรือยัง
             let item = cart.find(p => p.id == productID);
 
+            // ตรวจสอบสต็อกก่อนเพิ่ม
+            let product = allProducts.find(p => p.id == productID);
+            if (!product || product.stock <= 0) {
+                alert("ขออภัย สินค้าชิ้นนี้หมดสต็อกแล้ว!");
+                return;
+            }
+
             if (item) {
-                // ถ้ามีสินค้าอยู่แล้ว ให้เพิ่มจำนวน (quantity) ขึ้น 1
+                // ตรวจสอบว่าจำนวนในตะกร้าเกินสต็อกหรือไม่
+                if (item.quantity >= product.stock) {
+                    alert("ขออภัย คุณเพิ่มสินค้าเกินจำนวนสต็อกที่มีอยู่!");
+                    return;
+                }
                 item.quantity++;
             } else {
-                // ถ้ายังไม่มี ให้ค้นหาข้อมูลสินค้าตัวนั้นจาก allProducts มาเก็บไว้ในตะกร้า
-                let product = allProducts.find(p => p.id == productID);
-                if (product) {
-                    // push สินค้าใหม่เข้าไปใน array โดยเพิ่ม property quantity: 1
-                    cart.push({ ...product, quantity: 1 });
-                }
+                // push สินค้าใหม่เข้าไปใน array โดยเพิ่ม property quantity: 1
+                cart.push({ ...product, quantity: 1 });
             }
 
             // บันทึกข้อมูลตะกร้าสินค้า (Array) ลงใน localStorage

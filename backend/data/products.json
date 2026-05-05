@@ -5,15 +5,17 @@
         "price": 7.79,
         "sale_tag": "Sale",
         "image": "images/img-pro-01.jpg",
-        "category": "best-seller"
+        "category": "best-seller",
+        "stock": 48
     },
     {
         "id": 2,
         "name": "Fresh Strawberries",
-        "price": 12.50,
+        "price": 12.5,
         "sale_tag": "New",
         "image": "images/img-pro-02.jpg",
-        "category": "best-seller"
+        "category": "best-seller",
+        "stock": 0
     },
     {
         "id": 3,
@@ -21,7 +23,8 @@
         "price": 3.99,
         "sale_tag": "Sale",
         "image": "images/img-pro-03.jpg",
-        "category": "best-seller"
+        "category": "best-seller",
+        "stock": 52
     },
     {
         "id": 4,
@@ -29,7 +32,8 @@
         "price": 5.49,
         "sale_tag": null,
         "image": "images/img-pro-03.jpg",
-        "category": "special-grid"
+        "category": "special-grid",
+        "stock": 51
     },
     {
         "id": 5,
@@ -37,15 +41,17 @@
         "price": 2.99,
         "sale_tag": "Sale",
         "image": "images/img-pro-03.jpg",
-        "category": "best-seller"
+        "category": "best-seller",
+        "stock": 43
     },
     {
         "id": 6,
         "name": "Red Onion",
-        "price": 1.80,
+        "price": 1.8,
         "sale_tag": null,
         "image": "images/img-pro-03.jpg",
-        "category": "special-grid"
+        "category": "special-grid",
+        "stock": 16
     },
     {
         "id": 7,
@@ -53,15 +59,17 @@
         "price": 4.25,
         "sale_tag": "Sale",
         "image": "images/img-pro-03.jpg",
-        "category": "best-seller"
+        "category": "best-seller",
+        "stock": 46
     },
     {
         "id": 8,
         "name": "Whole Milk 1L",
-        "price": 3.50,
+        "price": 3.5,
         "sale_tag": null,
         "image": "images/img-pro-03.jpg",
-        "category": "special-grid"
+        "category": "special-grid",
+        "stock": 25
     },
     {
         "id": 9,
@@ -69,39 +77,44 @@
         "price": 6.99,
         "sale_tag": "Sale",
         "image": "images/img-pro-03.jpg",
-        "category": "best-seller"
+        "category": "best-seller",
+        "stock": 18
     },
     {
         "id": 10,
         "name": "Cheddar Cheese",
-        "price": 8.20,
+        "price": 8.2,
         "sale_tag": null,
         "image": "images/img-pro-03.jpg",
-        "category": "special-grid"
+        "category": "special-grid",
+        "stock": 45
     },
     {
         "id": 11,
         "name": "Artisan Sourdough",
-        "price": 5.50,
+        "price": 5.5,
         "sale_tag": "Sale",
         "image": "images/img-pro-03.jpg",
-        "category": "best-seller"
+        "category": "best-seller",
+        "stock": 10
     },
     {
         "id": 12,
         "name": "Whole Wheat Bread",
-        "price": 3.20,
+        "price": 3.2,
         "sale_tag": null,
         "image": "images/img-pro-03.jpg",
-        "category": "special-grid"
+        "category": "special-grid",
+        "stock": 44
     },
     {
         "id": 13,
         "name": "Free Range Eggs",
-        "price": 4.80,
+        "price": 4.8,
         "sale_tag": "New",
         "image": "images/img-pro-03.jpg",
-        "category": "best-seller"
+        "category": "best-seller",
+        "stock": 53
     },
     {
         "id": 14,
@@ -109,31 +122,35 @@
         "price": 15.99,
         "sale_tag": "Sale",
         "image": "images/img-pro-03.jpg",
-        "category": "special-grid"
+        "category": "special-grid",
+        "stock": 54
     },
     {
         "id": 15,
         "name": "Basmati Rice 5kg",
-        "price": 18.50,
+        "price": 18.5,
         "sale_tag": null,
         "image": "images/img-pro-03.jpg",
-        "category": "best-seller"
+        "category": "best-seller",
+        "stock": 54
     },
     {
         "id": 16,
         "name": "Roasted Coffee Beans",
-        "price": 14.00,
+        "price": 14,
         "sale_tag": "Hot",
         "image": "images/img-pro-03.jpg",
-        "category": "special-grid"
+        "category": "special-grid",
+        "stock": 33
     },
     {
         "id": 17,
         "name": "Green Tea Bags",
-        "price": 6.30,
+        "price": 6.3,
         "sale_tag": "Sale",
         "image": "images/img-pro-03.jpg",
-        "category": "best-seller"
+        "category": "best-seller",
+        "stock": 56
     },
     {
         "id": 18,
@@ -141,7 +158,8 @@
         "price": 4.99,
         "sale_tag": null,
         "image": "images/img-pro-03.jpg",
-        "category": "special-grid"
+        "category": "special-grid",
+        "stock": 38
     },
     {
         "id": 19,
@@ -149,22 +167,25 @@
         "price": 3.75,
         "sale_tag": "Sale",
         "image": "images/img-pro-03.jpg",
-        "category": "best-seller"
+        "category": "best-seller",
+        "stock": 43
     },
     {
         "id": 20,
         "name": "Organic Honey",
-        "price": 11.20,
+        "price": 11.2,
         "sale_tag": null,
         "image": "images/img-pro-03.jpg",
-        "category": "special-grid"
+        "category": "special-grid",
+        "stock": 34
     },
     {
         "id": 21,
         "name": "Cool Hat",
-        "price": 25.00,
+        "price": 25,
         "sale_tag": "New",
         "image": "images/img-pro-01.jpg",
-        "category": "special-grid"
+        "category": "special-grid",
+        "stock": 52
     }
 ]
