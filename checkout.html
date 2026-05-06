@@ -748,9 +748,16 @@
                 if (selectedShipping === 'shippingOption2') shippingMethod = 'express';
                 else if (selectedShipping === 'shippingOption3') shippingMethod = 'nextday';
 
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const address = document.getElementById('address').value;
+
                 const orderData = {
                     cartItems: cart,
+                    firstName: firstName,
+                    lastName: lastName,
                     email: email,
+                    address: address,
                     creditCard: creditCard,
                     shippingMethod: shippingMethod
                 };

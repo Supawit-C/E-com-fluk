@@ -1,32 +1,36 @@
-const fs = require('fs');
-const path = require('path');
-
-// Path to the local JSON data
-const productsFilePath = path.join(__dirname, '../data/products.json');
+const db = require('../config/database');
 
 /**
- * Service to handle data logic (Reading JSON)
+ * Service สำหรับดึงสินค้าทั้งหมดจาก SQLite
  */
 const getAllProducts = () => {
-    try {
-        const data = fs.readFileSync(productsFilePath, 'utf8');
-        return JSON.parse(data);
-    } catch (error) {
-        throw new Error('Could not read product database');
-    }
+    return new Promise((resolve, reject) => {
+        db.all('SELECT * FROM products', [], (err, rows) => {
+            if (err) {
+                console.error('DB Error (getAllProducts):', err);
+                reject(new Error('Could not read product database'));
+            } else {
+                resolve(rows);
+            }
+        });
+    });
 };
 
 /**
- * Service สำหรับดึงข้อมูลหมวกโดยเฉพาะ
+ * Service สำหรับดึงข้อมูลสินค้าหมวกโดยเฉพาะ
  */
 const getHatProduct = () => {
-    try {
-        const products = getAllProducts();
-        // ค้นหาหมวกที่ชื่อ "Cool Hat" ในฐานข้อมูล JSON
-        return products.find(p => p.name === 'Cool Hat');
-    } catch (error) {
-        throw new Error('Could not find Hat product');
-    }
+    return new Promise((resolve, reject) => {
+        // ค้นหาหมวกที่ชื่อ "Cool Hat" ในตาราง products
+        db.get('SELECT * FROM products WHERE name = ?', ['Cool Hat'], (err, row) => {
+            if (err) {
+                console.error('DB Error (getHatProduct):', err);
+                reject(new Error('Could not find Hat product'));
+            } else {
+                resolve(row);
+            }
+        });
+    });
 };
 
 module.exports = {

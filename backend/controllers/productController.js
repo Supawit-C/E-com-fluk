@@ -1,13 +1,14 @@
 const productService = require('../services/productService');
 
 /**
- * Controller to handle Request and Response logic
+ * Controller สำหรับดึงรายการสินค้าทั้งหมด
  */
-const getProducts = (req, res) => {
+const getProducts = async (req, res) => {
     try {
-        const products = productService.getAllProducts();
+        const products = await productService.getAllProducts();
         res.status(200).json(products);
     } catch (error) {
+        console.error('getProducts Error:', error);
         res.status(500).json({ 
             success: false, 
             message: error.message 
@@ -16,31 +17,34 @@ const getProducts = (req, res) => {
 };
 
 /**
- * Controller สำหรับจัดการ Logic ของ "Hat Scenario"
- * Processing: Server เปิดซองจดหมาย (Envelope), ตรวจสอบ Gatekeeper และดึงข้อมูล
+ * Controller สำหรับดึงข้อมูลหมวก (Hat Scenario)
  */
-const getHat = (req, res) => {
+const getHat = async (req, res) => {
     try {
-        // [GATEKEEPER] Logic: ตรวจสอบว่าใน "ซองจดหมาย" (Request Headers) มีกุญแจที่ถูกต้องหรือไม่
         const token = req.headers['x-envelope-token'];
         
         if (token !== 'secret-key') {
-            // [RESPONSE] หากกุญแจไม่ถูกต้อง ส่ง Status "Fail" กลับไป
             return res.status(403).json({ 
                 status: 'Fail', 
                 message: 'Gatekeeper denied access: Invalid envelope token.' 
             });
         }
 
-        // [FETCH DATA] หากกุญแจถูกต้อง ไปดึงข้อมูลหมวกจาก Service
-        const hat = productService.getHatProduct();
+        const hat = await productService.getHatProduct();
         
-        // [RESPONSE] ส่ง "Package" (JSON) และ Status "Success" กลับไปให้ Browser
+        if (!hat) {
+            return res.status(404).json({
+                status: 'Fail',
+                message: 'Product not found'
+            });
+        }
+
         res.status(200).json({
             status: 'Success',
             package: hat
         });
     } catch (error) {
+        console.error('getHat Error:', error);
         res.status(500).json({ 
             status: 'Fail', 
             message: error.message 
