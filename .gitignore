@@ -1,2 +1,11 @@
 node_modules/
 .DS_Store
+.env
+.env.*
+!.env.example
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+backend/data/ecommerce.db

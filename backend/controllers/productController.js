@@ -3,23 +3,19 @@ const productService = require('../services/productService');
 /**
  * Controller สำหรับดึงรายการสินค้าทั้งหมด
  */
-const getProducts = async (req, res) => {
+const getProducts = async (req, res, next) => {
     try {
         const products = await productService.getAllProducts();
         res.status(200).json(products);
     } catch (error) {
-        console.error('getProducts Error:', error);
-        res.status(500).json({ 
-            success: false, 
-            message: error.message 
-        });
+        next(error);
     }
 };
 
 /**
  * Controller สำหรับดึงข้อมูลหมวก (Hat Scenario)
  */
-const getHat = async (req, res) => {
+const getHat = async (req, res, next) => {
     try {
         const token = req.headers['x-envelope-token'];
         
@@ -44,11 +40,7 @@ const getHat = async (req, res) => {
             package: hat
         });
     } catch (error) {
-        console.error('getHat Error:', error);
-        res.status(500).json({ 
-            status: 'Fail', 
-            message: error.message 
-        });
+        next(error);
     }
 };
 

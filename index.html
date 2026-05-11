@@ -675,7 +675,7 @@
         async function requestProducts() {
             try {
                 // Step 2: Fetch the product data from the API.
-                const response = await fetch('http://localhost:3000/api/products');
+                const response = await fetch('/api/products');
 
                 if (!response.ok) throw new Error('ไม่สามารถโหลดข้อมูลสินค้าได้');
 
@@ -910,7 +910,7 @@
                 try {
                     // [REQUEST]: Browser ส่งซองจดหมาย (Fetch Request) ไปที่ Server
                     // มีการใส่ "x-envelope-token" ใน Headers เพื่อใช้เป็นกุญแจผ่านประตู
-                    const response = await fetch('http://localhost:3000/api/products/hat', {
+                    const response = await fetch('/api/products/hat', {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',

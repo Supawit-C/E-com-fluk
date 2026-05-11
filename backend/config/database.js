@@ -10,6 +10,8 @@ const db = new sqlite3.Database(dbPath, (err) => {
         console.error('Error connecting to database:', err.message);
     } else {
         console.log('Connected to the SQLite database (store.db).');
+        // Enable WAL mode for better concurrency performance
+        db.run('PRAGMA journal_mode = WAL;');
         initializeDatabase();
     }
 });
